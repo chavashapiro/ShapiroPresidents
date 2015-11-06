@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class PresidentAdapter
+public class PresidentRecycleViewAdapter
         extends RecyclerView.Adapter<PresidentViewHolder> {
 
     private PresidentList presidents;
 
-    public PresidentAdapter(PresidentList presidents) {
+    public PresidentRecycleViewAdapter(PresidentList presidents) {
         this.presidents = presidents;
     }
 
@@ -28,13 +28,15 @@ public class PresidentAdapter
     }
 
     @Override
-    public void onBindViewHolder(final PresidentViewHolder holder, int position) {
+    public void onBindViewHolder(final PresidentViewHolder holder, final int position) {
         holder.bind(presidents.get(position));
 
        holder.itemView.setOnClickListener(new View.OnClickListener() {
            public void onClick(View v) {
                Context context = holder.itemView.getContext();
                Intent intent = new Intent(context, DetailActivity.class);
+               intent.putExtra("POSITION", position);
+               intent.putExtra("PRESIDENTS", presidents);
                context.startActivity(intent);
            }
        });

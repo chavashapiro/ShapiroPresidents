@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    public static PresidentList presidents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         InputStream in = getResources().openRawResource(R.raw.presidents);
 
 
-        presidents = gson.fromJson(new InputStreamReader(in), PresidentList.class);
+        PresidentList presidents = gson.fromJson(new InputStreamReader(in), PresidentList.class);
 
-        PresidentAdapter adapter = new PresidentAdapter(presidents);
+        PresidentRecycleViewAdapter adapter = new PresidentRecycleViewAdapter(presidents);
         recyclerView.setAdapter(adapter);
 
     }
