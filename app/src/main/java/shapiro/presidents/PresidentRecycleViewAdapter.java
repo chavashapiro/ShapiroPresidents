@@ -3,6 +3,7 @@ package shapiro.presidents;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,11 @@ public class PresidentRecycleViewAdapter
         extends RecyclerView.Adapter<PresidentViewHolder> {
 
     private PresidentList presidents;
+    private int[] images;
 
-    public PresidentRecycleViewAdapter(PresidentList presidents) {
+    public PresidentRecycleViewAdapter(PresidentList presidents, int[] images) {
         this.presidents = presidents;
+        this.images = images;
     }
 
     @Override
@@ -37,6 +40,7 @@ public class PresidentRecycleViewAdapter
                Intent intent = new Intent(context, DetailActivity.class);
                intent.putExtra("POSITION", position);
                intent.putExtra("PRESIDENTS", presidents);
+                intent.putExtra("PRES_IMAGES", images);
                context.startActivity(intent);
            }
        });

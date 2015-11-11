@@ -16,10 +16,13 @@ public class DetailActivity extends AppCompatActivity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         ArrayList<President> presidents = (ArrayList<President>) getIntent().getSerializableExtra("PRESIDENTS");
-        PresidentPagerAdapter adapter = new PresidentPagerAdapter(new PresidentList(presidents));
+        int[] images = getIntent().getIntArrayExtra("PRES_IMAGES");
+        PresidentPagerAdapter adapter = new PresidentPagerAdapter(new PresidentList(presidents), images);
         viewPager.setAdapter(adapter);
 
         int position = getIntent().getIntExtra("POSITION", 0);
+
+
 
         viewPager.setCurrentItem(position);
 

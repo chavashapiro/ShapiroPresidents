@@ -5,14 +5,17 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PresidentPagerAdapter extends PagerAdapter {
 
     private PresidentList presidents;
+    private int[] images;
 
-    public PresidentPagerAdapter(PresidentList presidents) {
+    public PresidentPagerAdapter(PresidentList presidents, int[] images) {
         this.presidents = presidents;
+        this.images = images;
     }
 
     @Override
@@ -29,7 +32,9 @@ public class PresidentPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         View view = inflater.inflate(R.layout.president_pager_item, null);
-        //findViewById doesn't work by itself here b/c it's not part of PageAdapte
+        //findViewById doesn't work by itself here b/c it's not part of PageAdapter
+
+        ImageView image = (ImageView) view.findViewById(R.id.image);
         TextView name = (TextView) view.findViewById(R.id.name);
         TextView number = (TextView) view.findViewById(R.id.number);
         TextView aliveYears = (TextView) view.findViewById(R.id.aliveYears);
@@ -37,6 +42,8 @@ public class PresidentPagerAdapter extends PagerAdapter {
         TextView party = (TextView) view.findViewById(R.id.party);
 
         President president = presidents.get(position);
+        image.setImageResource(images[position]);
+        image.setAdjustViewBounds(true);
         name.setText(president.getPresident());
         number.setText(String.valueOf(president.getNumber()));
         if(president.getDeathYear() != null) {
