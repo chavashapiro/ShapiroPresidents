@@ -5,4 +5,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="PresidentInfo">
+        <item name="android:textSize">24dp</item>
+    </style>
+
 </resources>
