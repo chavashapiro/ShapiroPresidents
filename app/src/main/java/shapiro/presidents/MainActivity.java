@@ -17,77 +17,9 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        recyclerView = (RecyclerView) findViewById(R.id.list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create();
-        //or:
-        //GsonBuilder builder = new GsonBuilder();
-        //builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        //Gson gson = builder.create();
-        InputStream in = getResources().openRawResource(R.raw.presidents);
-
-
-        PresidentList presidents = gson.fromJson(new InputStreamReader(in), PresidentList.class);
-
-        int[] images = {R.drawable.george_washington, R.drawable.john_adams,
-                        R.drawable.thomas_jefferson, R.drawable.james_madison,
-                        R.drawable.james_monroe, R.drawable.john_quincy_adams,
-                        R. drawable.andrew_jackson, R.drawable.martin_van_buren,
-                        R.drawable.william_henry_harrison, R.drawable.john_tyler,
-                        R.drawable.james_k_polk, R.drawable.zachary_taylor,
-                        R.drawable.millard_fillmore, R.drawable.franklin_pierce,
-                        R.drawable.james_buchanan, R.drawable.abraham_lincoln,
-                        R.drawable.andrew_johnson, R.drawable.ulysses_s_grant,
-                        R.drawable.rutherford_b_hayes, R.drawable.james_a_garfield,
-                        R.drawable.chester_a_arthur, R.drawable.grover_cleveland,
-                        R.drawable.benjamin_harrison, R.drawable.grover_cleveland,
-                        R.drawable.william_mckinley, R.drawable.theodore_roosevelt,
-                        R.drawable.william_howard_taft, R.drawable.woodrow_wilson,
-                        R.drawable.warren_g_harding, R.drawable.calvin_coolidge,
-                        R.drawable.herbert_hoover, R.drawable.franklin_d_roosevelt,
-                        R.drawable.harry_s_truman, R.drawable.dwight_d_eisenhower,
-                        R.drawable.john_f_kennedy, R.drawable.lyndon_b_johnson,
-                        R.drawable.richard_m_nixon, R.drawable.gerald_ford,
-                        R.drawable.jimmy_carter, R.drawable.ronald_reagan,
-                        R.drawable.george_h_w_bush, R.drawable.bill_clinton,
-                        R.drawable.george_w_bush, R.drawable.barack_obama};
-
-        PresidentRecycleViewAdapter adapter = new PresidentRecycleViewAdapter(presidents, images);
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

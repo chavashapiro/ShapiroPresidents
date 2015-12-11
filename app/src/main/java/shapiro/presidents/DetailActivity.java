@@ -11,20 +11,15 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_detail);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        PresidentDetailFragment fragment =
+                (PresidentDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+
         ArrayList<President> presidents = (ArrayList<President>) getIntent().getSerializableExtra("PRESIDENTS");
         int[] images = getIntent().getIntArrayExtra("PRES_IMAGES");
-        PresidentPagerAdapter adapter = new PresidentPagerAdapter(new PresidentList(presidents), images);
-        viewPager.setAdapter(adapter);
-
         int position = getIntent().getIntExtra("POSITION", 0);
 
-
-
-        viewPager.setCurrentItem(position);
-
+        fragment.showPresidentDetail(presidents, images, position);
     }
 }
