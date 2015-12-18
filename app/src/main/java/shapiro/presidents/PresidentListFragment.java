@@ -76,7 +76,8 @@ public class PresidentListFragment extends Fragment {
                 R.drawable.george_h_w_bush, R.drawable.bill_clinton,
                 R.drawable.george_w_bush, R.drawable.barack_obama};
 
-        PresidentRecycleViewAdapter adapter = new PresidentRecycleViewAdapter(presidents, images);
+        OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
+        PresidentRecycleViewAdapter adapter = new PresidentRecycleViewAdapter(presidents, images, listener);
         recyclerView.setAdapter(adapter);
 
     }

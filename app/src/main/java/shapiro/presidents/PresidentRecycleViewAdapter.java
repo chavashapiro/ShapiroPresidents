@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 public class PresidentRecycleViewAdapter
         extends RecyclerView.Adapter<PresidentViewHolder> {
 
+    private OnPresidentSelectedListener listener;
     private PresidentList presidents;
     private int[] images;
 
-    public PresidentRecycleViewAdapter(PresidentList presidents, int[] images) {
+    public PresidentRecycleViewAdapter(PresidentList presidents, int[] images, OnPresidentSelectedListener listener) {
         this.presidents = presidents;
         this.images = images;
+        this.listener = listener;
     }
 
     @Override
@@ -35,13 +37,9 @@ public class PresidentRecycleViewAdapter
         holder.bind(presidents.get(position));
 
        holder.itemView.setOnClickListener(new View.OnClickListener() {
+           @Override
            public void onClick(View v) {
-               Context context = holder.itemView.getContext();
-               Intent intent = new Intent(context, DetailActivity.class);
-               intent.putExtra("POSITION", position);
-               intent.putExtra("PRESIDENTS", presidents);
-                intent.putExtra("PRES_IMAGES", images);
-               context.startActivity(intent);
+               listener.onSelect(presidents, images, position);
            }
        });
     }

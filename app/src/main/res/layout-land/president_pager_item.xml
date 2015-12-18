@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:src="@drawable/george_washington"
-        android:layout_alignParentLeft="true" />
+         />
 
     <TextView
         android:id="@+id/name"
@@ -18,17 +18,19 @@
         android:layout_height="wrap_content"
         tools:text="NAME"
         style="@style/PresidentInfo"
-        android:layout_above="@+id/aliveYears"
-        android:layout_alignLeft="@+id/aliveYears"
-        android:layout_alignStart="@+id/aliveYears" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toEndOf="@+id/image" />
 
     <TextView
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         tools:text="NUMBER"
-        style="@style/PresidentInfo"/>
+        style="@style/PresidentInfo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/aliveYears"
@@ -36,17 +38,20 @@
         android:layout_height="wrap_content"
         tools:text="ALIVE"
         style="@style/PresidentInfo"
-        android:layout_alignTop="@id/officeYears"
-        android:layout_toRightOf="@id/image"/>
+        android:layout_below="@+id/officeYears"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toEndOf="@+id/image" />
 
     <TextView
         android:id="@+id/officeYears"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/number"
-        android:layout_alignParentRight="true"
+
         tools:text="OFFICE"
-        style="@style/PresidentInfo"/>
+        style="@style/PresidentInfo"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toEndOf="@+id/image" />
 
     <TextView
         android:id="@+id/party"
@@ -54,7 +59,7 @@
         android:layout_height="wrap_content"
         tools:text="PARTY"
         style="@style/PresidentInfo"
-        android:layout_below="@id/officeYears"
+        android:layout_below="@+id/image"
         android:layout_centerHorizontal="true" />
 
 
