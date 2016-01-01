@@ -48,4 +48,6 @@ public class PresidentRecycleViewAdapter
     public int getItemCount() {
         return presidents.size();
     }
+
+
 }
