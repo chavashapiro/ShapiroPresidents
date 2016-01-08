@@ -17,6 +17,12 @@ import com.google.gson.GsonBuilder;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class PresidentListFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -41,19 +47,7 @@ public class PresidentListFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create();
-        //or:
-        //GsonBuilder builder = new GsonBuilder();
-        //builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        //Gson gson = builder.create();
-        InputStream in = getResources().openRawResource(R.raw.presidents);
-
-
-        PresidentList presidents = gson.fromJson(new InputStreamReader(in), PresidentList.class);
-
-        int[] images = {R.drawable.george_washington, R.drawable.john_adams,
+        final int[] images = {R.drawable.george_washington, R.drawable.john_adams,
                 R.drawable.thomas_jefferson, R.drawable.james_madison,
                 R.drawable.james_monroe, R.drawable.john_quincy_adams,
                 R. drawable.andrew_jackson, R.drawable.martin_van_buren,
@@ -76,9 +70,39 @@ public class PresidentListFragment extends Fragment {
                 R.drawable.george_h_w_bush, R.drawable.bill_clinton,
                 R.drawable.george_w_bush, R.drawable.barack_obama};
 
-        OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
-        PresidentRecycleViewAdapter adapter = new PresidentRecycleViewAdapter(presidents, images, listener);
-        recyclerView.setAdapter(adapter);
+        //Gson gson = new GsonBuilder()
+        //        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        //        .create();
+        //or:
+        //GsonBuilder builder = new GsonBuilder();
+        //builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+        //Gson gson = builder.create();
+        //InputStream in = getResources().openRawResource(R.raw.presidents);
+
+
+        //PresidentList presidents = gson.fromJson(new InputStreamReader(in), PresidentList.class);
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://raw.githubusercontent.com").
+                addConverterFactory(GsonConverterFactory.create()).build();
+        PresidentsService service = retrofit.create(PresidentsService.class);
+        Call<PresidentList> call = service.listPresidents();
+        call.enqueue(new Callback<PresidentList>() {
+            public void onResponse(Response<PresidentList> response) {
+                PresidentList presidents = response.body();
+
+                OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
+                PresidentRecycleViewAdapter adapter = new PresidentRecycleViewAdapter(presidents, images, listener);
+                recyclerView.setAdapter(adapter);
+            }
+
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
+
+
 
     }
+
 }

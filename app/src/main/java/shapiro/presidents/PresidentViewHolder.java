@@ -4,13 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-public class PresidentViewHolder extends RecyclerView.ViewHolder{
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-    private TextView name;
+public class PresidentViewHolder extends RecyclerView.ViewHolder{
+    @Bind(R.id.name)
+    TextView name;
 
     public PresidentViewHolder (View itemView) {
         super(itemView);
-        name = (TextView) itemView.findViewById(R.id.name);
+        ButterKnife.bind(this, itemView);
     }
 
     public void bind(President president) {
